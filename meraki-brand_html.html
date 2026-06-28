@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meraki — Identidad de Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --char: #0E0B0B;
+    --char-soft: #181212;
+    --bone: #EDE6DD;
+    --bone-dim: #A89E94;
+    --ember: #5C141F;
+    --ember-bright: #8A1F2D;
+    --clay: #6E5F58;
+    --gold: #8A1F2D;
+    --line: rgba(237,230,221,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--char);
+    color:var(--bone);
+    font-family:'Archivo',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 22px;}}
+
+  /* ---------- ember dot signature ---------- */
+  .ember-dot{
+    display:inline-block;
+    width:0.1em;height:0.1em;
+    border-radius:50%;
+    background: var(--ember-bright);
+    box-shadow: 0 0 3px 0.5px rgba(138,31,45,0.5);
+    vertical-align: 0.66em;
+    margin-left: 0.02em;
+  }
+  .merakiword{font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 32px;
+    mix-blend-mode:difference;
+  }
+  nav .navmark{font-family:'Bodoni Moda',serif; font-style:italic; font-size:20px; letter-spacing:0.01em;}
+  nav .navlinks{display:flex; gap:34px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;}
+  nav .navlinks a{color:var(--bone); text-decoration:none; opacity:0.75; transition:opacity .25s;}
+  nav .navlinks a:hover{opacity:1;}
+  @media (max-width:640px){ nav .navlinks{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    position:relative;
+    padding:120px 24px 80px;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 40%, rgba(92,20,31,0.18), transparent 70%),
+      var(--char);
+  }
+  .eyebrow{
+    font-size:11px; letter-spacing:0.32em; text-transform:uppercase;
+    color:var(--clay); margin-bottom:28px; opacity:0.9;
+  }
+  .hero h1{
+    font-family:'Bodoni Moda',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(72px,15vw,168px);
+    line-height:0.92;
+    letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    margin-top:30px;
+    font-size:15px;
+    letter-spacing:0.06em;
+    color:var(--bone-dim);
+    max-width:480px;
+    line-height:1.7;
+  }
+  .scroll-cue{
+    position:absolute; bottom:40px; left:50%; transform:translateX(-50%);
+    font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--clay);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue::after{
+    content:''; width:1px; height:38px; background:linear-gradient(var(--clay), transparent);
+    animation: stretch 2.2s ease-in-out infinite;
+  }
+  @keyframes stretch{0%,100%{opacity:0.3;}50%{opacity:1;}}
+
+  /* ---------- section shell ---------- */
+  section{padding:140px 0;}
+  .label-row{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:60px;
+  }
+  .label-row .num{font-size:12px; color:var(--clay); letter-spacing:0.1em;}
+  .label-row h2{
+    font-family:'Bodoni Moda',serif; font-weight:500; font-size:clamp(28px,4vw,42px);
+  }
+  .label-row .rule{flex:1; height:1px; background:var(--line); margin-left:8px;}
+
+  /* ---------- manifesto ---------- */
+  .manifesto{border-top:1px solid var(--line);}
+  .manifesto-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;
+  }
+  @media (max-width:780px){ .manifesto-grid{grid-template-columns:1fr; gap:40px;} }
+  .manifesto p{
+    font-size:clamp(22px,3vw,32px);
+    font-family:'Bodoni Moda',serif; font-weight:300;
+    line-height:1.45;
+    color:var(--bone);
+  }
+  .manifesto p em{font-style:italic; color:var(--ember-bright);}
+  .pillars{display:flex; flex-direction:column; gap:0;}
+  .pillar{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:18px 0; border-bottom:1px solid var(--line);
+    font-size:14px; letter-spacing:0.04em;
+  }
+  .pillar .pname{color:var(--bone); text-transform:uppercase; letter-spacing:0.12em; font-size:12px;}
+  .pillar .pdesc{color:var(--bone-dim); text-align:right; max-width:55%; font-size:13px;}
+
+  /* ---------- logo system ---------- */
+  .logo-section{border-top:1px solid var(--line);}
+  .logo-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:1px; background:var(--line);}
+  @media (max-width:780px){.logo-grid{grid-template-columns:1fr;}}
+  .logo-card{
+    background:var(--char-soft);
+    padding:60px 40px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:24px; min-height:300px;
+    text-align:center;
+  }
+  .logo-card .cap{font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay);}
+  .logo-primary{font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500; font-size:48px;}
+  .logo-card.light{background:var(--bone);}
+  .logo-card.light .logo-primary{color:var(--char);}
+  .logo-card.light .cap{color:var(--clay);}
+
+  .monogram{
+    width:84px; height:84px; border-radius:50%;
+    border:1px solid rgba(241,234,224,0.3);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bodoni Moda',serif; font-style:italic; font-size:34px;
+    position:relative;
+  }
+  .icon-flame{width:46px; height:58px;}
+
+  /* ---------- poster ---------- */
+  .poster-section{border-top:1px solid var(--line);}
+  .poster-frame{
+    width:100%; max-width:430px; margin:0 auto;
+    aspect-ratio:5/7;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 16%, rgba(92,20,31,0.22), transparent 65%),
+      var(--char);
+    border:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:40px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .poster-frame .ptop{font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--clay); text-align:center;}
+  .poster-frame .pmid{text-align:center;}
+  .poster-frame .pmid .word{font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500; font-size:64px; line-height:1;}
+  .poster-frame .ptag{margin-top:14px; font-size:12px; letter-spacing:0.1em; color:var(--bone-dim);}
+  .poster-frame .pbot{display:flex; justify-content:space-between; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--clay);}
+  .poster-grain{
+    position:absolute; inset:0; opacity:0.5; mix-blend-mode:overlay; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+
+  .poster-row{display:flex; gap:60px; align-items:center; flex-wrap:wrap; justify-content:center;}
+  .poster-notes{max-width:340px; display:flex; flex-direction:column; gap:22px;}
+  .note{font-size:13px; line-height:1.7; color:var(--bone-dim);}
+  .note strong{color:var(--bone); font-weight:500;}
+
+  /* ---------- tee mockup ---------- */
+  .tee-section{border-top:1px solid var(--line);}
+  .tee-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  @media (max-width:780px){.tee-grid{grid-template-columns:1fr;}}
+  .tee-mock{
+    width:100%; aspect-ratio:1/1;
+    background:var(--bone-dim);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .tee-shape{
+    width:62%; height:72%;
+    position:relative;
+  }
+  .tee-shape svg{width:100%; height:100%;}
+  .tee-print{
+    position:absolute; top:38%; left:50%; transform:translate(-50%,-50%);
+    text-align:center;
+  }
+  .tee-print .word{font-family:'Bodoni Moda',serif; font-style:italic; font-weight:500; font-size:26px; color:var(--char);}
+  .tee-print .small{font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--char); opacity:0.6; margin-top:4px;}
+
+  .tee-dark .tee-mock{background:var(--char-soft);}
+  .tee-dark .tee-print .word, .tee-dark .tee-print .small{color:var(--bone);}
+
+  .tee-variants{display:flex; gap:16px; margin-top:24px;}
+  .swatch{width:28px; height:28px; border-radius:50%; border:1px solid var(--line);}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:80px 0 50px;
+  }
+  .footer-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:30px;}
+  footer .fmark{font-family:'Bodoni Moda',serif; font-style:italic; font-size:30px;}
+  footer .fmeta{font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--clay); text-align:right;}
+  footer .fmeta div{margin-bottom:6px;}
+
+  ::selection{background:var(--ember); color:var(--char);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navmark">Meraki<span class="ember-dot"></span></div>
+  <div class="navlinks">
+    <a href="#manifesto">Esencia</a>
+    <a href="#identidad">Identidad</a>
+    <a href="#poster">Afiche</a>
+    <a href="#tee">Indumentaria</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Samborondón, Ecuador</div>
+  <h1>Meraki<span class="ember-dot"></span></h1>
+  <p class="sub">Lo que queda de ti cuando haces algo con el alma.<br>Cada plato, una decisión. Nada de relleno, todo con intención.</p>
+  <div class="scroll-cue">Desliza</div>
+</section>
+
+<section class="manifesto" id="manifesto">
+  <div class="wrap">
+    <div class="label-row"><span class="num">01</span><h2>Esencia</h2><div class="rule"></div></div>
+    <div class="manifesto-grid">
+      <p>No servimos comida. Servimos <em>decisiones</em> — un plato con cinco ingredientes bien elegidos vale más que uno con quince. Lo que quitamos del plato importa tanto como lo que dejamos.</p>
+      <div class="pillars">
+        <div class="pillar"><span class="pname">Alma</span><span class="pdesc">Cada plato lleva una intención, no una fórmula.</span></div>
+        <div class="pillar"><span class="pname">Dedicación</span><span class="pdesc">La técnica se domina antes de simplificarla.</span></div>
+        <div class="pillar"><span class="pname">Calidad</span><span class="pdesc">Ingrediente correcto, técnica precisa, sin atajos.</span></div>
+        <div class="pillar"><span class="pname">Sofisticación</span><span class="pdesc">Elegancia sin pretensión — clase sin gritarla.</span></div>
+        <div class="pillar"><span class="pname">Minimalismo</span><span class="pdesc">Cada plato dice solo lo necesario, nada más.</span></div>
+        <div class="pillar"><span class="pname">Amor</span><span class="pdesc">El ingrediente que no se compra ni se sustituye.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="logo-section" id="identidad">
+  <div class="wrap">
+    <div class="label-row"><span class="num">02</span><h2>Sistema de identidad</h2><div class="rule"></div></div>
+  </div>
+  <div class="logo-grid">
+    <div class="logo-card">
+      <div class="cap">Wordmark principal</div>
+      <div class="logo-primary">Meraki<span class="ember-dot"></span></div>
+    </div>
+    <div class="logo-card light">
+      <div class="cap">Sobre claro</div>
+      <div class="logo-primary">Meraki<span class="ember-dot"></span></div>
+    </div>
+    <div class="logo-card">
+      <div class="cap">Monograma</div>
+      <div class="monogram">M<span class="ember-dot"></span></div>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:60px;">
+    <div class="poster-notes" style="margin:0 auto; text-align:left;">
+      <div class="note"><strong>El punto sobre la "i":</strong> no es un punto tipográfico, es la firma — un matiz apenas más claro dentro de la misma escala de grises, nunca un color distinto. Representa lo que distingue a un plato bien pensado: un solo detalle preciso, no decoración acumulada. Aparece en el wordmark, el monograma, y como sello suelto en vajilla y empaques.</div>
+      <div class="note"><strong>Tipografía:</strong> Bodoni Moda itálica para todo lo que lleve voz y alma (el nombre, los titulares) — alto contraste, trazo afilado, clase editorial; Archivo para todo lo funcional (menú, datos, horarios) — la diferencia entre lo que se siente y lo que se lee.</div>
+      <div class="note"><strong>Paleta:</strong> monocromática — un solo tono recorriendo todos sus matices, del carbón casi negro al hueso cálido. Sin color añadido; la jerarquía se construye con contraste de valor, no con acentos.</div>
+    </div>
+  </div>
+</section>
+
+<section class="poster-section" id="poster">
+  <div class="wrap">
+    <div class="label-row"><span class="num">03</span><h2>Afiche</h2><div class="rule"></div></div>
+    <div class="poster-row">
+      <div class="poster-frame">
+        <div class="poster-grain"></div>
+        <div class="ptop">Esencia &amp; Detalle</div>
+        <div class="pmid">
+          <div class="word">Meraki<span class="ember-dot"></span></div>
+          <div class="ptag">Lo esencial, bien hecho,<br>es suficiente</div>
+        </div>
+        <div class="pbot"><span>Samborondón</span><span>Menú de temporada</span></div>
+      </div>
+      <div class="poster-notes">
+        <div class="note"><strong>Composición:</strong> el wordmark al centro, suficiente espacio negativo alrededor — el silencio es parte del lujo. Sin fotografía de platos en el afiche principal; la palabra y el espacio en blanco bastan.</div>
+        <div class="note"><strong>Uso:</strong> formato vertical 50×70cm para entrada y redes; versión cuadrada para feed de Instagram con el mismo sistema de jerarquía.</div>
+        <div class="note"><strong>Variante de temporada:</strong> el tag inferior ("Menú de temporada") rota según los platos del momento — el wordmark y el punto nunca cambian.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tee-section" id="tee">
+  <div class="wrap">
+    <div class="label-row"><span class="num">04</span><h2>Indumentaria</h2><div class="rule"></div></div>
+    <div class="tee-grid">
+      <div class="tee-mock">
+        <div class="tee-shape">
+          <svg viewBox="0 0 200 220" fill="none">
+            <path d="M40 20 L80 8 C90 22 110 22 120 8 L160 20 L180 55 L155 70 L150 210 L50 210 L45 70 L20 55 Z" fill="var(--bone)" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+          </svg>
+          <div class="tee-print">
+            <div class="word">Meraki<span class="ember-dot"></span></div>
+            <div class="small">Esencia &amp; Detalle</div>
+          </div>
+        </div>
+      </div>
+      <div class="tee-mock tee-dark" style="grid-row:1;">
+        <div class="tee-shape">
+          <svg viewBox="0 0 200 220" fill="none">
+            <path d="M40 20 L80 8 C90 22 110 22 120 8 L160 20 L180 55 L155 70 L150 210 L50 210 L45 70 L20 55 Z" fill="var(--char-soft)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          </svg>
+          <div class="tee-print">
+            <div class="word">Meraki<span class="ember-dot"></span></div>
+            <div class="small">Esencia &amp; Detalle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0; margin-top:30px;">
+      <div class="poster-notes" style="margin:0;">
+        <div class="note"><strong>Impresión:</strong> bordado mínimo o serigrafía tono sobre tono — el logo nunca compite con la prenda, vive discreto al pecho izquierdo o centrado pequeño.</div>
+        <div class="note"><strong>Colores de prenda:</strong> hueso, carbón y los tonos intermedios de la misma paleta — todo dentro de una sola familia de color, sin acentos externos.</div>
+      </div>
+      <div class="tee-variants">
+        <div class="swatch" style="background:var(--bone);"></div>
+        <div class="swatch" style="background:var(--char-soft);"></div>
+        <div class="swatch" style="background:var(--clay);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div class="fmark">Meraki<span class="ember-dot"></span></div>
+    <div class="fmeta">
+      <div>Identidad de marca</div>
+      <div>Samborondón, Ecuador</div>
+      <div>Esencia, sin adornos</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
